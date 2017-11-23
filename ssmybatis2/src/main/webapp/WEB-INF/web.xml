@@ -1,0 +1,63 @@
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<display-name>Archetype Created Web Application</display-name>
+	<!--request session application application.setAttribute("contextConfigLocation","classpath:applicationContext*.xml,classpath:applicationContext-*.xml"); 
+		注意点：contextConfigLocation不要写错了，严格区分大小写 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:applicationContext*.xml,classpath:applicationContext-*.xml
+		</param-value>
+	</context-param>
+
+
+	<!-- 监听器 ，因为我们开发的javaweb项目(javaee项目)，spring beanFactory初始化过程中存储的方式有ApplicationContext三个子类 
+		ClassPathXMLApplicationContext FileSystemApplicationContext WebApplicationContext-Spring对象管理最后都交给WebApplicationContext管理 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+
+	<!-- spring框架提供的字符集过滤器 -->
+	<!-- spring Web MVC框架提供了org.springframework.web.filter.CharacterEncodingFilter用于解决POST方式造成的中文乱码问题 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<!-- force强制，促使 -->
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- 配置springmvc的前端控制器 return (this.namespace != null ? this.namespace : 
+		getServletName() + DEFAULT_NAMESPACE_SUFFIX); DEFAULT_NAMESPACE_SUFFIX=="-sevlet" 
+		getServletName()：mkssm -->
+	<servlet>
+		<servlet-name>mkssm</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>namespace</param-name>
+			<param-value>liucrm</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>mkssm</servlet-name>
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
