@@ -27,8 +27,8 @@
 	<!-- 配置SqlSessionFactory,org.mybatis.spring.SqlSessionFactoryBean是mybatis社区开发用于整合Spring的类 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
-		<property name="typeAliasesPackage" value="com.mk.bean"></property>
-		<property name="mapperLocations" value="classpath:com/liu/mapper/xml/*.xml"></property>
+		<property name="typeAliasesPackage" value="com.liu.bean"></property>
+		<property name="mapperLocations" value="classpath:com/liu/mapper/*.xml"></property>
 	</bean>
 	
 	<!-- 配置jdbc事务 -->
